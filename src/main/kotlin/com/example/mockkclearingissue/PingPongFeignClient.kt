@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.PostMapping
 @FeignClient(name = "pingpong", url = "localhost:3000", primary = true)
 interface PingPongFeignClient {
     @PostMapping(
-        value = ["/pingpong"],
-        consumes = [MediaType.APPLICATION_JSON_VALUE]
+        value = ["/pingpong"]
     )
-    fun ping(ping: Ping): Pong
+    fun ping(ping: Int): Int
 
-    @JvmInline
-    value class Ping(val number: Int)
-    @JvmInline
-    value class Pong(val number: Int)
+    @PostMapping(
+        value = ["/doesnothing"]
+    )
+    fun doesNothing()
 }
